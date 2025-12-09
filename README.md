@@ -10,21 +10,21 @@ code
 Bash
 docker compose up -d
 La salida de la terminal confirma que el contenedor mc-server fue creado e iniciado correctamente.
-![alt text](./imagenes/captura1.png)
+
 2. Verificación del Inicio del Servidor
 Para asegurar que el servidor se había inicializado por completo y estaba operativo, se procedió a monitorizar sus logs en tiempo real con el comando:
 code
 Bash
 docker logs -f mc-server
 El proceso se consideró exitoso al aparecer el mensaje Done (...) For help, type "help", que indica que la generación del mundo ha finalizado y el servidor está listo.
-![alt text](./imagenes/captura2.png)
+
 3. Gestión de Permisos de Administrador (OP)
 El último punto de la práctica consistía en interactuar con el servidor para otorgar permisos de administrador. Para ello, se utilizó la utilidad rcon-cli a través del comando docker exec. Se usó el nombre de usuario genérico Steve para la demostración.
 code
 Bash
 docker exec mc-server rcon-cli op Steve
 Como se muestra en la siguiente captura, el servidor responde con el mensaje That player does not exist.
-![alt text](./imagenes/captura3.png)
+
 Análisis del Resultado
 Este resultado es el comportamiento esperado y correcto en este escenario. El software del servidor de Minecraft solo puede asignar el rol de operador (op) a un usuario que se haya conectado previamente al menos una vez. Dado que el despliegue se realizó íntegramente mediante Docker sin que ningún cliente de juego se conectara, la base de datos de jugadores del servidor está lógicamente vacía.
 Por lo tanto, aunque el resultado no coincide con el "resultado esperado" del enunciado, la prueba es exitosa, ya que demuestra que la comunicación con la consola del servidor a través de docker exec es funcional y permite ejecutar comandos administrativos.
